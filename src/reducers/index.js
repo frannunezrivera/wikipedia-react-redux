@@ -1,5 +1,5 @@
 import {
-    REQUEST_PAGES, RECEIVE_PAGES, RECEIVE_PAGE, REQUEST_PAGE
+    REQUEST_PAGES, RECEIVE_PAGES, RECEIVE_PAGE, REQUEST_PAGE, ADD_BOOKMARK, REMOVE_BOOKMARK
 } from '../actions'
 
 const initialState = {
@@ -13,19 +13,6 @@ const initialState = {
         pagesById: {}
     }
 };
-
-function rootReducer(state = initialState, action) {
-    switch (action.type) {
-        case REQUEST_PAGES:
-        case RECEIVE_PAGES:
-            return Object.assign({}, state, pages(state, action));
-        case REQUEST_PAGE:
-        case RECEIVE_PAGE:
-            return Object.assign({}, state, pageDetail(state, action));
-        default:
-            return state
-    }
-}
 
 const pageDetail = (state = {}, action) => {
     switch (action.type) {
@@ -47,10 +34,66 @@ const pagesById = (state = {}, action) => {
                 ...state,
                 ...action.pages
             };
+        case ADD_BOOKMARK:
+            if (action.pageId) {
+                return Object.assign({}, state.bookmarks.pagesById, {
+                    [action.pageId]: state.pageDetails[action.pageId]
+                })
+            }
+            return state.bookmarks;
+        case REMOVE_BOOKMARK:
+            if (action.pageId) {
+                return Object.assign({}, Object.keys(state.bookmarks.pagesById).reduce(function (result, key) {
+                    if (parseInt(key, 10) !== action.pageId) {
+                        result[key] = state.bookmarks.pagesById[key];
+                    }
+                    return result;
+                }, {}))
+            }
+            return state.bookmarks;
         default:
             return state;
     }
 };
+
+const bookmarks = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_BOOKMARK:
+            return Object.assign({}, state, {
+                bookmarks: {
+                    pageIds: [...state.bookmarks.pageIds, action.pageId],
+                    pagesById: pagesById(state, action)
+                }
+            })
+        case REMOVE_BOOKMARK:
+            return Object.assign({}, state, {
+                bookmarks: {
+                    pageIds: state.bookmarks.pageIds.filter(function (pageId) {
+                        return pageId !== action.pageId
+                    }),
+                    pagesById: pagesById(state, action)
+                }
+            })
+        default:
+            return state
+    }
+}
+
+function rootReducer(state = initialState, action) {
+    switch (action.type) {
+        case REQUEST_PAGES:
+        case RECEIVE_PAGES:
+            return Object.assign({}, state, pages(state, action));
+        case REQUEST_PAGE:
+        case RECEIVE_PAGE:
+            return Object.assign({}, state, pageDetail(state, action));
+        case ADD_BOOKMARK:
+        case REMOVE_BOOKMARK:
+            return Object.assign({}, state, bookmarks(state, action));
+        default:
+            return state
+    }
+}
 
 const pageIds = (state = [], action) => {
     switch (action.type) {
