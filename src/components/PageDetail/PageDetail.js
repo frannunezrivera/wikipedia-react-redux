@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import './PageDetail.css'
 
 class PageDetail extends Component {
     render() {
         const {item, handleBookmarkButton, isBookmarked} = this.props;
         const {title, thumbnail, categories, extract} = item;
-        return <article>
+        return <article className="page-detail">
             <header><h2>{title}</h2>
                 <button onClick={handleBookmarkButton}>
                     {isBookmarked ? 'Remove ' : 'Add '} Bookmark

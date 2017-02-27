@@ -1,0 +1,28 @@
+header {
+  background: black;
+  color: white;
+  padding: 1em 1em 0;
+  text-transform: uppercase;
+  nav {
+    text-align: left;
+    a {
+      position: relative;
+      display: inline-block;
+      font-size: 13px;
+      line-height: 40px;
+      padding: 0 2em;
+      -webkit-transition: all .3s ease;
+      text-decoration: none;
+      color:white;
+      &.disabled-link {
+        pointer-events: none;
+        background: white;
+        color: #555;
+      }
+      &:hover{
+        background: rgba(255,255,255,.9);
+        color: black;
+      }
+    }
+  }
+}

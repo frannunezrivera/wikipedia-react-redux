@@ -10,7 +10,7 @@ class BookmarksContainer extends React.Component {
     render() {
         const {items, actions} = this.props;
 
-        return (<section>{!items.length ? <div className="no-bookmarks">No bookmarks</div>:
+        return (<section className="bookmarks">{!items.length ? <div className="no-bookmarks">No bookmarks</div>:
             <ItemList title="Items">
                 {items.map(item =>
                     <BookmarkItem

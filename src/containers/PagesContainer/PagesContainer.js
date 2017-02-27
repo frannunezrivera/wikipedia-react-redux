@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {getPages} from '../../reducers/index'
 import Item from '../../components/Item/Item'
 import PageList from '../../components/PageList/PageList'
+import Loading from '../../components/Loading/Loading'
 
 import {fetchPages} from '../../actions'
 
@@ -18,7 +19,7 @@ class PagesContainer extends React.Component {
     render() {
         const {pages, isFetching, actions} = this.props;
 
-        return (<section>{isFetching || !pages ? 'Loading...' :
+        return (<section>{isFetching || !pages ? <Loading/> :
             <PageList onGetMorePagesClicked={() => actions.fetchPages()}>
                 {pages.map(page =>
                     <Item

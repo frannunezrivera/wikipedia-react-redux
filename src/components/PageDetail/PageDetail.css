@@ -1,0 +1,22 @@
+.page-detail header {
+  background-color: white;
+  color: black; }
+
+.page-detail img {
+  margin: 10px;
+  border-radius: 8px;
+  border: 2px solid #EFEFEF; }
+
+.page-detail section {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 100px; }
+  .page-detail section p {
+    text-align: justify;
+    padding-bottom: 2em; }
+  .page-detail section ul {
+    background-color: aliceblue;
+    border: 2px solid silver; }
+    .page-detail section ul li {
+      display: inline-block;
+      padding: 4px; }

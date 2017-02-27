@@ -1,0 +1,23 @@
+header {
+  background: black;
+  color: white;
+  padding: 1em 1em 0;
+  text-transform: uppercase; }
+  header nav {
+    text-align: left; }
+    header nav a {
+      position: relative;
+      display: inline-block;
+      font-size: 13px;
+      line-height: 40px;
+      padding: 0 2em;
+      -webkit-transition: all .3s ease;
+      text-decoration: none;
+      color: white; }
+      header nav a.disabled-link {
+        pointer-events: none;
+        background: white;
+        color: #555; }
+      header nav a:hover {
+        background: rgba(255, 255, 255, 0.9);
+        color: black; }

@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getPageDetail} from '../../reducers/index'
 import PageDetail from '../../components/PageDetail/PageDetail'
+import Loading from '../../components/Loading/Loading'
 
 import {fetchPage, addBookmark, removeBookmark} from '../../actions'
 
@@ -33,7 +34,7 @@ class DetailContainer extends React.Component {
 
 
         return (<section>
-            {isFetching ? 'Loading...' :
+            {isFetching ? <Loading/>:
                 <PageDetail
                     key={pageDetail.pageid}
                     item={pageDetail}

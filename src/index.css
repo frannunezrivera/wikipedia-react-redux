@@ -1,4 +1,20 @@
+html {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 12px; }
+
 body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif; }
+  padding: 0; }
+
+button {
+  font-size: 17px;
+  padding: 8px;
+  color: black;
+  background-color: white;
+  border: 1px solid #cccccc;
+  cursor: pointer;
+  -webkit-transition: all .3s ease; }
+  button:hover {
+    border: 1px solid #888;
+    background: #999;
+    color: white; }
