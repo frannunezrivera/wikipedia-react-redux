@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 
 class PageDetail extends Component {
     render() {
-        const {item} = this.props;
+        const {item, handleBookmarkButton, isBookmarked} = this.props;
         const {title, thumbnail, categories, extract} = item;
         return <article>
             <header><h2>{title}</h2>
+                <button onClick={handleBookmarkButton}>
+                    {isBookmarked ? 'Remove ' : 'Add '} Bookmark
+                </button>
             </header>
             <section>
                 {thumbnail ?
