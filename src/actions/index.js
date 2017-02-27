@@ -10,7 +10,7 @@ function requestPages() {
 function receivePages(data) {
     return {
         type: RECEIVE_PAGES,
-        pages: data
+        pages: data.query.pages
     }
 }
 
@@ -18,6 +18,10 @@ export function fetchPages() {
     return function (dispatch) {
         dispatch(requestPages());
 
-        return dispatch(receivePages({}))
+        return fetch('https://en.wikipedia.org/w/api.php?action=query&format=json&prop=&generator=random&grnnamespace=0&grnlimit=10&origin=*')
+            .then(response => response.json())
+            .then(json =>
+                dispatch(receivePages(json))
+            )
     }
 }
