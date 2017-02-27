@@ -63,3 +63,10 @@ function pages(state, action) {
 }
 
 export default rootReducer;
+
+export const getPage = (state, id) =>
+    state.pagesById[id];
+
+export const getPages = state => {
+    return state.pageIds.map(id => getPage(state, id));
+}
