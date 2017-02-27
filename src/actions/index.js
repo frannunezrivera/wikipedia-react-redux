@@ -4,6 +4,9 @@ export const RECEIVE_PAGES = 'RECEIVE_PAGES'
 export const REQUEST_PAGE = 'REQUEST_PAGE'
 export const RECEIVE_PAGE = 'RECEIVE_PAGE'
 
+export const ADD_BOOKMARK = 'ADD_BOOKMARK'
+export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK'
+
 function requestPages() {
     return {
         type: REQUEST_PAGES
@@ -56,3 +59,21 @@ export function fetchPage(pageId) {
 
     }
 }
+
+export const addBookmark = pageId => (dispatch, getState) => {
+    if (getState().rootReducer.bookmarks.pageIds.indexOf(pageId) === -1) {
+        dispatch({
+            type: ADD_BOOKMARK,
+            pageId
+        })
+    }
+};
+
+export const removeBookmark = pageId => (dispatch, getState) => {
+    if (getState().rootReducer.bookmarks.pageIds.indexOf(pageId) !== -1) {
+        dispatch({
+            type: REMOVE_BOOKMARK,
+            pageId
+        })
+    }
+};
