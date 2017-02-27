@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/App';
+import DetailContainer from './containers/DetailContainer/DetailContainer';
 import './index.scss';
 
 import {Provider} from 'react-redux'
@@ -33,8 +34,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" name="root" component={App} title="Pages">
-                <Route path='/page/:id' name="pageDetail" title="Page Detail"/>
-                <Route path='/bookmarks' name="bookmarks" title="Bookmarks"/>
+                <Route path='/page/:id' component={DetailContainer} title="Page Detail"/>
+                <Route path='/bookmarks' title="Bookmarks"/>
             </Route>
         </Router>
     </Provider>,
