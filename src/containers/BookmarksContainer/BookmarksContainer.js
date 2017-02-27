@@ -1,21 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getPages} from '../../reducers/index'
-import Item from '../../components/Item/Item'
+import BookmarkItem from '../../components/BookmarkItem/BookmarkItem'
 import ItemList from '../../components/ItemList/ItemList'
 
 import {removeBookmark} from '../../actions'
 
 class BookmarksContainer extends React.Component {
     render() {
-        const {items} = this.props;
+        const {items, actions} = this.props;
 
         return (<section>{!items.length ? <div className="no-bookmarks">No bookmarks</div>:
             <ItemList title="Items">
                 {items.map(item =>
-                    <Item
+                    <BookmarkItem
                         key={item.pageid}
                         item={item}
+                        onRemoveButtonClick={() => actions.removeBookmark(item.pageid)}
                     />
                 )}
             </ItemList>}
@@ -31,6 +32,14 @@ function mapStateToProps(state) {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
+            removeBookmark: (pageId) => dispatch(removeBookmark(pageId)),
+        }
+    }
+}
 
 export default connect(
-    mapStateToProps)(BookmarksContainer)
+    mapStateToProps,
+    mapDispatchToProps)(BookmarksContainer)
